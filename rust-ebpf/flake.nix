@@ -1,5 +1,5 @@
 {
-  description = "Elixir Phoenix flake";
+  description = "Rust eBPF flake";
 
   # Nixpkgs / NixOS version to use.
   inputs.nixpkgs.url = "nixpkgs/nixos-unstable";
@@ -30,14 +30,18 @@
         {
           default = pkgs.mkShell {
             buildInputs = with pkgs; [
-              erlang
-              elixir
-              glibcLocales
-              inotify-tools
-              postgresql
+              libxml2
+              llvm
+              openssl
+              pkg-config
+              rustup
             ];
             shellHook = ''
-              echo "ok"
+              rustup install stable
+              rustup default stable
+              rustup toolchain install nightly --component rust-src
+              cargo install --no-default-features bpf-linker
+              cargo install cargo-generate
             '';
           };
         });

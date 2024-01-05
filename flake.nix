@@ -10,6 +10,11 @@
         description = "Basic elixir+phoenix flake template";
       };
 
+      rust-ebpf = {
+        path = ./rust-ebpf;
+        description = "Basic rust ebpf flake template";
+      };
+
     };
 
     defaultTemplate = self.templates.phoenix;
